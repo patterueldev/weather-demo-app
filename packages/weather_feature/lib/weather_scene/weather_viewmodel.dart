@@ -11,6 +11,7 @@ class WeatherException implements Exception {
 
 abstract class WeatherScreenViewModel extends ChangeNotifier {
   ValueNotifier<WeatherState> get state;
+  String get cityText;
   Future<void> loadWeather();
   void updateCity(String city);
 }
@@ -26,7 +27,8 @@ class DefaultWeatherViewModel extends WeatherScreenViewModel {
   ValueNotifier<WeatherState> state =
       ValueNotifier<WeatherState>(WeatherState());
 
-  String city = 'New York';
+  @override
+  String cityText = 'New York';
 
   Timer? _loadTimer;
 
@@ -34,7 +36,7 @@ class DefaultWeatherViewModel extends WeatherScreenViewModel {
   Future<void> loadWeather() async {
     state.value = WeatherLoading();
     final weatherOrFailure = await getWeatherUseCase(
-      GetWeatherParameters(city: city),
+      GetWeatherParameters(city: cityText),
     ).run();
     weatherOrFailure.fold(
       (failure) {
@@ -48,7 +50,7 @@ class DefaultWeatherViewModel extends WeatherScreenViewModel {
 
   @override
   void updateCity(String city) {
-    this.city = city;
+    this.cityText = city;
     _resetTimer();
   }
 

@@ -58,4 +58,4 @@ apps/quiz_mobile/ios/Runner/GoogleService-Info.plist
 .dart_tool/
 .devdbrc
 
-.env
+apps/weather_app/.env

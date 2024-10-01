@@ -69,18 +69,28 @@ class _WeatherScreenState extends State<WeatherScreen> {
       Scaffold(
         appBar: AppBar(
           title: const Text('Weather'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: viewModel.loadWeather,
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                const SearchBar(hintText: 'Search city'),
+                SearchBar(
+                  hintText: 'Search city',
+                  controller: TextEditingController(),
+                  onChanged: (text) => viewModel.updateCity(text),
+                ),
                 ValueListenableBuilder(
                   valueListenable: viewModel.state,
                   builder: (context, state, child) {
                     if (state is WeatherLoaded) {
-                      return _buildWeatherCard(state.weather);
+                      return _buildWeatherBody(state.weather);
                     }
                     return const SizedBox();
                   },
@@ -91,15 +101,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
         ),
       );
 
-  Widget _buildWeatherCard(WeatherModel weather) {
-    return Card(
-      child: Column(
-        children: [
-          Text(weather.cityName),
-          Text(weather.temperature.toString()),
-          Text(weather.weatherDescription),
-        ],
-      ),
+  Widget _buildWeatherBody(WeatherModel weather) {
+    return Column(
+      children: [
+        Text(weather.cityName),
+        Text(weather.temperature.toString()),
+        Text(weather.weatherDescription),
+      ],
     );
   }
 
