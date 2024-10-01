@@ -86,6 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   controller: TextEditingController(),
                   onChanged: (text) => viewModel.updateCity(text),
                 ),
+                const SizedBox(height: 16),
                 ValueListenableBuilder(
                   valueListenable: viewModel.state,
                   builder: (context, state, child) {
@@ -102,13 +103,54 @@ class _WeatherScreenState extends State<WeatherScreen> {
       );
 
   Widget _buildWeatherBody(WeatherModel weather) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final iconSize = screenWidth * 0.3;
+
     return Column(
       children: [
-        Text(weather.cityName),
-        Text(weather.temperature.toString()),
-        Text(weather.weatherDescription),
+        _weatherText(weather.cityName, style: const TextStyle(fontSize: 32)),
+        BoxedIcon(
+          size: iconSize,
+          _iconForCondition(weather.condition),
+        ),
+        _weatherText(_capitalizeWords(weather.weatherDescription.toString())),
+        _weatherText(_degreeCelcius(weather.temperature)),
       ],
     );
+  }
+
+  Widget _weatherText(String text, {TextStyle? style}) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final fontSize = screenWidth * 0.05;
+    return Text(
+      text,
+      style: style ?? TextStyle(fontSize: fontSize),
+    );
+  }
+
+  String _capitalizeWords(String text) {
+    if (text.isEmpty) return text;
+    return text.split(' ').map((word) {
+      if (word.isEmpty) return word;
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).join(' ');
+  }
+
+  String _degreeCelcius(double temperature) {
+    return '${temperature.toStringAsFixed(1)}°C';
+  }
+
+  IconData _iconForCondition(WeatherCondition condition) {
+    switch (condition) {
+      case WeatherCondition.sunny:
+        return WeatherIcons.day_sunny;
+      case WeatherCondition.rainy:
+        return WeatherIcons.rain;
+      case WeatherCondition.cloudy:
+        return WeatherIcons.cloud;
+      case WeatherCondition.snowy:
+        return WeatherIcons.snow;
+    }
   }
 
   // Show the temperature, weather condition (e.g., sunny, rainy), and an appropriate weather icon.
