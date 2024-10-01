@@ -9,7 +9,7 @@ import 'package:weather/weather.dart' as weather_api;
 part 'weather_repository_impl.dart';
 
 class WeatherFeatureDsProvider {
-  static MultiProvider providers = MultiProvider(
+  final MultiProvider providers = MultiProvider(
     providers: [
       Provider<WeatherFactory>(
         create: (context) => weather_api.WeatherFactory(

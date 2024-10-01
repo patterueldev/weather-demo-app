@@ -16,7 +16,7 @@ part 'weather_scene/get_weather_usecase.dart';
 part 'weather_scene/get_weather_parameters.dart';
 
 class WeatherProvider {
-  static MultiProvider providers = MultiProvider(
+  final providers = MultiProvider(
     providers: [
       Provider<GetWeatherUseCase>(
         create: (context) => DefaultGetWeatherUseCase(
@@ -26,7 +26,7 @@ class WeatherProvider {
     ],
   );
 
-  static Widget buildWeatherScreen() {
+  Widget buildWeatherScreen() {
     return ChangeNotifierProvider<WeatherScreenViewModel>(
       create: (context) => DefaultWeatherViewModel(
         getWeatherUseCase: context.read(),
