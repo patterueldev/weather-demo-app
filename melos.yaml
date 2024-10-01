@@ -1,0 +1,30 @@
+name: mobile_quiz_app
+
+packages:
+  - apps/*
+  - packages/*
+  - ext/*
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  test:
+    exec: flutter test
+  outdated:
+    exec: flutter pub outdated
+  upgrade:
+    exec: flutter pub upgrade
+  get:
+    exec: dart pub get
+  update:
+    exec: dart pub update
+  build_runner:build:
+    exec: dart run build_runner build --delete-conflicting-outputs
+  format:
+    name: "format"
+    description: "Format dart files using dart fix and import sorter"
+    run: |
+      dart fix --apply &&
+        (dart run import_sorter:main || (dart pub add --dev import_sorter && dart run import_sorter:main))
+    exec:
+      failFast: true

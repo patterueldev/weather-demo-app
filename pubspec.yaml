@@ -1,0 +1,6 @@
+name: mobile_quiz_app
+
+environment:
+  sdk: '>=3.1.9 <4.0.0'
+dev_dependencies:
+  melos: ^6.1.0
