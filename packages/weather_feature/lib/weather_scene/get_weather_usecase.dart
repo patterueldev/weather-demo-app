@@ -23,6 +23,7 @@ class DefaultGetWeatherUseCase implements GetWeatherUseCase {
         final weather = await weatherRepository.getWeather(parameters);
         return weather;
       }, (error, stackTrace) {
+        if (error is WeatherException) return error;
         return WeatherException('Failed to get weather');
       });
 }

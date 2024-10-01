@@ -7,6 +7,27 @@ abstract class WeatherModel {
   WeatherCondition get condition;
 }
 
+class DefaultWeatherModel implements WeatherModel {
+  @override
+  String cityName;
+
+  @override
+  WeatherCondition condition;
+
+  @override
+  double temperature;
+
+  @override
+  String weatherDescription;
+
+  DefaultWeatherModel({
+    required this.cityName,
+    required this.condition,
+    required this.temperature,
+    required this.weatherDescription,
+  });
+}
+
 enum WeatherCondition {
   sunny,
   rainy,
