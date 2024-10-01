@@ -1,0 +1,61 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+# .env
+# .env.*
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# FVM
+
+# fastlane specific
+**/fastlane/report.xml
+
+# deliver temporary files
+**/fastlane/Preview.html
+
+# snapshot generated screenshots
+**/fastlane/screenshots
+
+# scan temporary files
+**/fastlane/test_output
+
+pubspec_overrides.yaml
+
+#firebase
+firebase_options.dart
+apps/quiz_mobile/android/app/google-services.json
+apps/quiz_mobile/ios/firebase_app_id_file.json
+apps/quiz_mobile/ios/Runner/GoogleService-Info.plist
+
+# FVM Version Cache
+.fvm/
+
+.dart_tool/
+.devdbrc
+
+.env
